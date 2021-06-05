@@ -1,3 +1,4 @@
+#!/bin/bash
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 
 function initialize () {
@@ -52,17 +53,21 @@ function update_goenv () {
     cd $SCRIPT_DIR
 }
 
+function update_text () {
+    printf "\033[32m%s\033[m\n" ">>> Updating $1"
+}
+
 function main () {
     initialize
-    echo ">>> Updating Homebrew"
+    update_text "Homebrew"
     update_brew
-    echo ">>> Updating SDKMAN!"
+    update_text "SDKMAN!"
     update_sdkman
-    # echo ">>> Updating nvm"
+    # update_text "nvm"
     # update_nvm
-    echo ">>> Updating prezto"
+    update_text "Prezto"
     update_prezto
-    echo ">>> Updating goenv"
+    update_text "goenv"
     update_goenv
 }
 
