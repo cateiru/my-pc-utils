@@ -22,6 +22,7 @@ export PATH="$PATH:$GOPATH/bin"
 
 # setting alias to lsd
 alias ls='lsd'
+alias restart='exec $SHELL -l'
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
