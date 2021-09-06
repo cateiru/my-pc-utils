@@ -15,6 +15,8 @@
   - [Vim](#vim)
   - [Docker](#docker)
   - [TODO](#todo)
+    - [sshの公開鍵認証化](#sshの公開鍵認証化)
+    - [gitのGitHubログイン（commitの認証）](#gitのgithubログインcommitの認証)
   - [TODO: 必要に応じて](#todo-必要に応じて)
     - [nvm](#nvm)
     - [goenv](#goenv)
@@ -38,6 +40,10 @@ test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
 test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
 echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+```
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/yuto51942/my-pc-utils/main/ubuntu/install.sh | bash --linuxbrew
 ```
 
 ## Linuxbrew tools
@@ -216,7 +222,36 @@ sudo systemctl restart docker
 
 - sshの公開鍵認証化
 - gitのGitHubログイン
-  - commitの認証
+  - commitの署名
+
+### sshの公開鍵認証化
+
+- [SSH公開鍵認証で接続するまで](https://qiita.com/kazokmr/items/754169cfa996b24fcbf5)
+
+### gitのGitHubログイン（commitの認証）
+
+- [Gitを使い始めたら一番最初にやりたい `git config`設定メモ](https://blog.katsubemakito.net/git/git-config-1st)
+- [GPGの秘密鍵や公開鍵のバックアップ方法](https://www.rk-k.com/archives/3351)
+
+```bash
+pager.branch=cat
+gpg.program=gpg
+user.signingkey=[]
+user.email=[]
+user.name=[]
+commit.gpgsign=true
+color.ui=true
+core.editor=vim
+core.quotepath=false
+credential.helper=cache --timeout=86400
+```
+
+- GPG秘密鍵の復元
+
+  ```bash
+  gpg --import [gpg private key path]
+  gpg --import [gpg public key path]
+  ```
 
 ## TODO: 必要に応じて
 

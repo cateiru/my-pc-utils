@@ -1,6 +1,6 @@
 #! /bin/bash
 
-function linuxbrew() {
+function linuxbrew () {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
     test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
@@ -10,21 +10,21 @@ function linuxbrew() {
     echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
 }
 
-function linuxbrew_tools() {
+function linuxbrew_tools () {
     brew install git
     brew install lsd
     brew install vim
     brew install curl
 }
 
-function apply_zsh() {
+function apply_zsh () {
     apt_update()
 
     sudo apt install zsh
     chsh -s $(which zsh)
 }
 
-function zprezto() {
+function prezto () {
     # require git.
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
@@ -35,12 +35,12 @@ function zprezto() {
 }
 
 
-function apt_update() {
+function apt_update () {
     sudo apt update
     sudo apt upgrade
 }
 
-function goenv() {
+function goenv () {
     git clone https://github.com/syndbg/goenv.git ~/.goenv
 
     echo 'export GOENV_ROOT="$HOME/.goenv"' >> ~/.zshrc
@@ -50,7 +50,7 @@ function goenv() {
     echo 'export PATH="$PATH:$GOPATH/bin"' >> ~/.zshrc
 }
 
-function monitoring_tool() {
+function monitoring_tool () {
     echo "grep -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' /var/log/auth.log | grep -E 'Accepted' | cut -d ' ' -f 11 | sort | uniq" > ~/check_login.sh
     echo "sudo hddtemp /dev/sdc
           sudo hddtemp /dev/sdd" > ~/how_temp.sh
@@ -64,3 +64,36 @@ function monitoring_tool() {
     chmod +x ~/try_ip.sh
     chmod +x ~/try_username.sh
 }
+
+function _help () {
+    echo "------ help -----
+
+- `--linuxbrew`: Linuxbrewのインストール
+- `--brew-tools`: Linuxbrewで最低限のツールをインストール
+- `--zsh`: デフォルトシェルをzshに変更
+- `--prezto`: preztoのインストール
+- `--goenv`: goenvのインストール
+- `--tools`: モニタリングツールの設定"
+}
+
+
+function main () {
+    case $1 in
+    "--linuxbrew" ) linuxbrew ;;
+    "--brew-tools" ) linuxbrew_tools ;;
+    "--zsh" ) apply_zsh ;;
+    "--prezto" ) prezto ;;
+    "--goenv" ) goenv ;;
+    "--tools" ) monitoring_tool ;;
+    "--help" ) _help ;;
+    esac
+}
+
+
+if [ $# != 1 ]; then
+    echo "引数を指定してください
+    help: --help"
+    exit 1
+fi
+
+main $1

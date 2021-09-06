@@ -53,7 +53,7 @@ function update_goenv () {
     cd $SCRIPT_DIR
 }
 
- function update_rustup() {
+ function update_rustup () {
     rustup self update
  }
 
