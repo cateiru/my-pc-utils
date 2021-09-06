@@ -53,6 +53,10 @@ function update_goenv () {
     cd $SCRIPT_DIR
 }
 
+ function update_rustup() {
+    rustup self update
+ }
+
 function update_text () {
     printf "\033[32m%s\033[m\n" ">>> Updating $1"
 }
@@ -69,6 +73,8 @@ function main () {
     update_prezto
     update_text "goenv"
     update_goenv
+    update_text "cargo"
+    update_rustup
 }
 
 if [ "$(uname)" == 'Darwin' ]; then
