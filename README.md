@@ -1,5 +1,10 @@
 # My PC Utils
 
+## OS
+
+- [mac](./mac/README.md)
+- [ubuntu](./ubuntu/README.md)
+
 ## アップデート
 
 - HomeBrew
