@@ -340,3 +340,15 @@ pyenv install [version]
 ### Chrome
 
 - [Chromeを起動するとログインキーリングのパスワードを入れる画面が表示される](https://help.media.hiroshima-u.ac.jp/index.php?solution_id=1039)
+
+### Terminal.app
+
+- テーマ適用
+
+```bash
+dconf load /org/gnome/terminal/legacy/profiles:/ < gnome-terminal-nerd-profiles.dconf
+```
+
+- fonts
+  - hack-nerd-fonts
+    https://github.com/ryanoasis/nerd-fonts/releases
